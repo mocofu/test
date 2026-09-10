@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SQLiteデータベース管理モジュール
+SQLiteデータベース管理モジュール (修正版)
 """
 
 import sqlite3
@@ -71,9 +71,11 @@ def init_db():
     
     conn.commit()
     
-    # 初期サンプルデータの投入
+    # 初期サンプルデータの投入（修正：件数を正しく判定）
     cur.execute("SELECT COUNT(*) FROM users")
-    if cur.fetchone() == 0:
+    count = cur.fetchone()
+    
+    if count == 0:
         sample_users = [
             ("山田 太郎", 1, 2, "yamada@highschool.ed.jp", 0, "1年2組の山田です！ボドゲとサッカーが好きです。", "サッカー部, ボードゲーム", "⚽"),
             ("佐藤 花子", 2, 1, "sato@highschool.ed.jp", 1, "生徒会＆生徒管理者です。みんなで良い学校SNSにしましょう！", "生徒会, 生徒管理者, 吹奏楽部", "🎷"),
